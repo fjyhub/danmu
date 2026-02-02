@@ -16,12 +16,7 @@
           <td>{{ item.text_input }}</td>
           <td>{{ formatDate(item.date_create) }}</td>
           <td>
-            <button
-              type="button"
-              class="btn-delete"
-              :disabled="deletingId === item.id"
-              @click="handleDelete(item.id)"
-            >
+            <button type="button" class="btn-delete" :disabled="deletingId === item.id" @click="handleDelete(item.id)">
               {{ deletingId === item.id ? '删除中...' : '删除' }}
             </button>
           </td>
@@ -38,7 +33,7 @@
 import { ref, onMounted } from 'vue'
 import dayjs from 'dayjs'
 
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_BASE
 
 const list = ref([])
 const loading = ref(true)
@@ -118,17 +113,21 @@ h2 {
   border-collapse: collapse;
   font-size: 14px;
 }
-.comment-table th,td {
-    padding: 10px 12px;
-    text-align: left;
-    border: 1px solid #e8e8e8;
+
+.comment-table th,
+td {
+  padding: 10px 12px;
+  text-align: left;
+  border: 1px solid #e8e8e8;
 }
-.comment-table  th {
-    background: #fafafa;
-    font-weight: 600;
+
+.comment-table th {
+  background: #fafafa;
+  font-weight: 600;
 }
+
 .comment-table tbody tr:hover {
-    background: #f9f9f9;
+  background: #f9f9f9;
 }
 
 .comment-table .empty {

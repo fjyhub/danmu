@@ -2,28 +2,15 @@
 import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import vueDanmaku from 'vue-danmaku'
-const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000'
+const API_BASE = import.meta.env.VITE_API_BASE
 const router = useRouter()
 
 const danmus = ref([])
 const timer = ref(null)
-const colors = ref([
-    { id: 0, color: '#ff5722', size: 20 },
-    { id: 1, color: '#ff5722', size: 20 },
-    { id: 2, color: '#2196f3', size: 18 },
-    { id: 3, color: '#4caf50', size: 16 },
-    { id: 4, color: '#ffc107', size: 18 },
-    { id: 5, color: '#9c27b0', size: 18 },
-    { id: 6, color: '#e91e63', size: 16 },
-    { id: 7, color: '#3f51b5', size: 20 },
-    { id: 8, color: '#795548', size: 16 },
-    { id: 9, color: '#607d8b', size: 18 },
-])
 onMounted(() => {
     timer.value = setInterval(() => {
         getAllData()
     }, 2000)
-
 })
 onBeforeUnmount(() => {
     if (timer.value) {
@@ -59,9 +46,7 @@ const handleDelete = () => {
             <template #danmu="{ index, danmu }" loop>
                 <div class="custom-danmaku">
                     <span :style="{
-                        color: 'rgba(255, 255, 255, 0.8)',
-                        // color: colors[index % 10].color || '#ffffff',
-                        // fontSize: `${colors[index % 10].size || 16}px`,
+                        color: '#ff0d0d',
                     }" class="custom-danmaku-text">{{ danmu.text_input }}</span>
                 </div>
             </template>
