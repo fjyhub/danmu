@@ -1,7 +1,9 @@
 <script setup>
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 import vueDanmaku from 'vue-danmaku'
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000'
+const router = useRouter()
 
 const danmus = ref([])
 const timer = ref(null)
@@ -42,20 +44,29 @@ const getAllData = async () => {
         console.log('----error---', error)
     }
 }
+const handleDelete = () => {
+    const routeUrl = router.resolve({
+        path: '/management'
+    })
+    window.open(routeUrl.href, '_blank')
+}
 </script>
 
 <template>
     <div class="main">
-        <vue-danmaku v-model:danmus="danmus" style="height:100vh;" loop>
+        <vue-danmaku v-model:danmus="danmus" style="height:100vh;" loop :speeds="150" :loopOnly="true"
+            :randomChannel="true">
             <template #danmu="{ index, danmu }" loop>
                 <div class="custom-danmaku">
                     <span :style="{
-                        color: colors[index % 10].color || '#ffffff',
-                        fontSize: `${colors[index % 10].size || 16}px`,
+                        color: 'rgba(255, 255, 255, 0.8)',
+                        // color: colors[index % 10].color || '#ffffff',
+                        // fontSize: `${colors[index % 10].size || 16}px`,
                     }" class="custom-danmaku-text">{{ danmu.text_input }}</span>
                 </div>
             </template>
         </vue-danmaku>
+        <div class="delete" @click="handleDelete"></div>
     </div>
 </template>
 
@@ -65,19 +76,26 @@ const getAllData = async () => {
     height: 100vh;
     background: url('../../assets/image/bg.jpg');
     background-size: cover;
+    position: relative;
 }
 
 .custom-danmaku {
-    background-color: rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(0, 0, 0, 0.1); */
 }
 
 .custom-danmaku-text {
     color: #fff;
     font-weight: bold;
-    padding: 4px 6px;
-    border-radius: 8px;
-    margin: 4px 8px;
-    /* display: inline-block; */
-    /* background-image: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3)); */
+}
+
+.delete {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background: #ff0000;
+    border-radius: 50% 50%;
+    cursor: pointer;
 }
 </style>
