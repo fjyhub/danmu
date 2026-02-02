@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onBeforeUnmount, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import vueDanmaku from 'vue-danmaku'
 const API_BASE = import.meta.env.VITE_API_BASE || 'http://localhost:3000'
@@ -25,7 +25,7 @@ onMounted(() => {
     }, 2000)
 
 })
-onUnmounted(() => {
+onBeforeUnmount(() => {
     if (timer.value) {
         clearInterval(timer)
         timer.value = null
@@ -66,7 +66,9 @@ const handleDelete = () => {
                 </div>
             </template>
         </vue-danmaku>
-        <div class="delete" @click="handleDelete"></div>
+        <div class="delete" @click="handleDelete">
+
+        </div>
     </div>
 </template>
 
@@ -79,9 +81,9 @@ const handleDelete = () => {
     position: relative;
 }
 
-.custom-danmaku {
-    /* background-color: rgba(0, 0, 0, 0.1); */
-}
+/* .custom-danmaku {
+    background-color: rgba(0, 0, 0, 0.1);
+} */
 
 .custom-danmaku-text {
     color: #fff;
@@ -92,10 +94,11 @@ const handleDelete = () => {
     position: absolute;
     bottom: 10px;
     right: 10px;
-    width: 50px;
-    height: 50px;
-    background: #ff0000;
+    width: 20px;
+    height: 20px;
     border-radius: 50% 50%;
     cursor: pointer;
+    background: url('../../assets/image/setting.png');
+    background-size: cover;
 }
 </style>
