@@ -61,7 +61,7 @@ const handleDelete = () => {
 .main {
     width: 100vw;
     height: 100vh;
-    background: url('../../assets/image/bg.jpg');
+    background: url('../../assets/image/bg.png');
     background-size: cover;
     position: relative;
 }
