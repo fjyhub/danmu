@@ -43,7 +43,7 @@ const handleDelete = () => {
     <div class="main">
         <vue-danmaku v-model:danmus="danmus" style="height:100vh;" loop :speeds="150" :loopOnly="true"
             :randomChannel="true">
-            <template #danmu="{ index, danmu }" loop>
+            <template #danmu="{ index, danmu }">
                 <div class="custom-danmaku">
                     <span :style="{
                         color: '#ff0d0d',
